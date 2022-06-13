@@ -63,8 +63,12 @@ enum CoinListViewModel: CoinListBusinessRules {
             var indexPaths: [IndexPath] = []
             
             for (index, coinModel) in coinModelsMutableProperty.value.enumerated() where identifieres.contains(coinModel.identifier) {
-                coinModel.coin.priceUSD = getPriceUSD(with: coinModel.identifier, array: dataCoins)
-                indexPaths.append(IndexPath(row: index, section: 0))
+                let oldPrice = getPriceUSD(with: coinModel.identifier, array: dataCoins)
+                
+                if oldPrice != coinModel.coin.priceUSD {
+                    coinModel.coin.priceUSD = oldPrice
+                    indexPaths.append(IndexPath(row: index, section: 0))
+                }
             }
             
             updateIndexPathObserver.send(value: indexPaths)

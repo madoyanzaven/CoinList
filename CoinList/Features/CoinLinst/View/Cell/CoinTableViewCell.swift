@@ -16,7 +16,7 @@ class CoinTableViewCell: UITableViewCell {
     @IBOutlet private weak var coinImageView: UIImageView!
     @IBOutlet private weak var percentLabel: UILabel!
     @IBOutlet private weak var percentStateImageView: UIImageView!
-    @IBOutlet private weak var percentBackgroundStackView: UIStackView!
+    @IBOutlet private weak var percentBackgroundView: UIView!
     
     private let downArrow = Constants.Icons.downArrow
     private let upArrow = Constants.Icons.upArrow
@@ -26,7 +26,7 @@ class CoinTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        percentBackgroundStackView.layer.cornerRadius = 4
+        percentBackgroundView.layer.cornerRadius = 4
     }
     
     func setup(with model: CoinModel) {
@@ -46,7 +46,7 @@ class CoinTableViewCell: UITableViewCell {
     private func setupPercentState(with model: CoinModel) {
         let hasNegativePercent = model.hasNegativePercent
         
-        percentBackgroundStackView.backgroundColor = hasNegativePercent ? Constants.Collors.mainRed?.withAlphaComponent(0.1) : Constants.Collors.mainGreen?.withAlphaComponent(0.1)
+        percentBackgroundView.backgroundColor = hasNegativePercent ? Constants.Collors.mainRed?.withAlphaComponent(0.1) : Constants.Collors.mainGreen?.withAlphaComponent(0.1)
         
         percentStateImageView.image = hasNegativePercent ? downArrow : upArrow
         percentLabel.textColor = hasNegativePercent ? mainRedColor : mainGreenColor
